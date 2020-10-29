@@ -22,7 +22,7 @@ class ArticlesController extends AbstractController
 
 
     /**
-     * @Route("/articles", name="articles", methods={"GET"})
+     * @Route("/api/articles", name="articles", methods={"GET"})
      */
     public function showAll(): JsonResponse
     {
@@ -31,7 +31,7 @@ class ArticlesController extends AbstractController
     }
 
     /**
-     * @Route("/articles/create", methods={"POST"})
+     * @Route("/api/articles/create", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
      */
