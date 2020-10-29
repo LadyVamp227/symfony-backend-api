@@ -19,19 +19,19 @@ class ArticlesController extends AbstractController
     {
         $this->articleRepository = $articleRepository;
     }
+
+
     /**
-     * @Route("/articles", name="articles")
+     * @Route("/articles", name="articles", methods={"GET"})
      */
-    public function index(): Response
+    public function showAll(): JsonResponse
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/ArticlesController.php',
-        ]);
+        $articles = $this->articleRepository->findAll();
+        return new JsonResponse($this->articleRepository->getAllArticles($articles), Response::HTTP_OK);
     }
 
     /**
-     * @Route("/articles/create", name="articles", methods={"POST"})
+     * @Route("/articles/create", methods={"POST"})
      */
     public function create(Request $request):JsonResponse {
 
@@ -39,6 +39,6 @@ class ArticlesController extends AbstractController
         $articleBody = $request->get('article_body');
 
         $this->articleRepository->saveArticle($articleTitle, $articleBody);
-        return new JsonResponse('Success',200);
+        return new JsonResponse('Success',Response::HTTP_CREATED);
     }
 }

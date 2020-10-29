@@ -39,6 +39,22 @@ class ArticlesRepository extends ServiceEntityRepository
         $this->manager->persist($article);
         $this->manager->flush();
     }
+    public function getAllArticles($articles)
+    {
+        $data = array();
+        foreach ($articles as $article) {
+            $data[] = [
+                'id' => $article->getId(),
+                'article_created' => $article->getArticleCreated(),
+                'article_published' => $article->getArticlePublished(),
+                'article_title' => $article->getArticleTitle(),
+                'article_body' => $article->getArticleBody(),
+                'article_active' => $article->getArticleActive(),
+
+            ];
+        }
+        return $data;
+    }
     // /**
     //  * @return Articles[] Returns an array of Articles objects
     //  */
