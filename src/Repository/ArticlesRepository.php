@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Articles;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,11 +15,30 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArticlesRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Articles::class);
-    }
+    /**
+     * @var EntityManagerInterface
+     */
+    private $manager;
 
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $manager)
+    {
+        
+        parent::__construct($registry, Articles::class);
+        $this->manager = $manager;
+    }
+    public function saveArticle($articleTitle, $articleBody)
+    {
+        $article = new Articles();
+        $article
+            ->setArticleCreated(new \DateTime())
+            ->setArticlePublished(new \DateTime())
+            ->setArticleTitle($articleTitle)
+            ->setArticleBody($articleBody)
+            ->setArticleActive(1);
+
+        $this->manager->persist($article);
+        $this->manager->flush();
+    }
     // /**
     //  * @return Articles[] Returns an array of Articles objects
     //  */
