@@ -15,11 +15,6 @@ class Articles
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $article_id;
 
     /**
@@ -49,19 +44,7 @@ class Articles
 
     public function getId(): ?int
     {
-        return $this->id;
-    }
-
-    public function getArticleId(): ?int
-    {
         return $this->article_id;
-    }
-
-    public function setArticleId(int $article_id): self
-    {
-        $this->article_id = $article_id;
-
-        return $this;
     }
 
     public function getArticleCreated(): ?\DateTimeInterface
