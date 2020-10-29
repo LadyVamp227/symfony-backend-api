@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ArticlesController extends AbstractController
 {
+    //TODO: Error handling and validation of inputs
 
     private $articleRepository;
 
