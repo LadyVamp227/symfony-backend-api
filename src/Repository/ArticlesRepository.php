@@ -26,7 +26,7 @@ class ArticlesRepository extends ServiceEntityRepository
         parent::__construct($registry, Articles::class);
         $this->manager = $manager;
     }
-    public function saveArticle($articleTitle, $articleBody)
+    public function saveArticle($articleTitle, $articleBody, $isActive)
     {
         $article = new Articles();
         $article
@@ -34,7 +34,7 @@ class ArticlesRepository extends ServiceEntityRepository
             ->setArticlePublished(new \DateTime())
             ->setArticleTitle($articleTitle)
             ->setArticleBody($articleBody)
-            ->setArticleActive(1);
+            ->setArticleActive($isActive ? 1 : 0);
 
         $this->manager->persist($article);
         $this->manager->flush();
@@ -42,7 +42,7 @@ class ArticlesRepository extends ServiceEntityRepository
     public function getAllArticles($articles)
     {
         $data = array();
-        foreach ($articles as $article) {
+        foreach ($articles ?? [] as $article) {
             $data[] = [
                 'id' => $article->getId(),
                 'article_created' => $article->getArticleCreated(),
