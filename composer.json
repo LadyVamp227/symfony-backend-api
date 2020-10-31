@@ -5,6 +5,7 @@
         "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.1",
@@ -19,8 +20,8 @@
         "symfony/property-access": "5.1.*",
         "symfony/property-info": "5.1.*",
         "symfony/serializer": "5.1.*",
-        "symfony/yaml": "5.1.*",
-        "ext-json": "*"
+        "symfony/validator": "5.1.*",
+        "symfony/yaml": "5.1.*"
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.23"

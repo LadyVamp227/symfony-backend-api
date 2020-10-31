@@ -38,14 +38,17 @@ class ArticlesController extends AbstractController
      * @return JsonResponse
      */
     public function create(Request $request): JsonResponse {
-
         $article = json_decode($request->getContent(), true);
         $articleTitle = $article['article_title'];
         $articleBody = $article['article_body'];
         $articleActive = $article['isActive'];
-
-        $this->articleRepository->saveArticle($articleTitle, $articleBody, $articleActive);
-
-        return new JsonResponse($article,Response::HTTP_CREATED);
+        $response = "Bad Request";
+        $status = Response::HTTP_BAD_REQUEST;
+        if (!empty($articleActive) and !empty($articleTitle) and !empty($articleBody)) {
+            $this->articleRepository->saveArticle($articleTitle, $articleBody, $articleActive);
+            $response = "Success";
+            $status = Response::HTTP_CREATED;
+        }
+        return new JsonResponse($response,$status);
     }
 }
