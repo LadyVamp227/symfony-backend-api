@@ -28,7 +28,7 @@ class ArticlesController extends AbstractController
      */
     public function showAll(): JsonResponse
     {
-        $articles = $this->articleRepository->findAll();
+        $articles = $this->articleRepository->findBy(array(),array('article_id'=>'desc'));
         return new JsonResponse($this->articleRepository->getAllArticles($articles), Response::HTTP_OK);
     }
 
