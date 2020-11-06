@@ -48,4 +48,11 @@ class ArticlesController extends AbstractController
         }
         return new JsonResponse($response,$status);
     }
+    /**
+     * @Route("/demo", name="demo", methods={"GET"})
+     */
+    public function demo(Request $request)
+    {
+     return $this->render('primer.html');
+    }
 }
